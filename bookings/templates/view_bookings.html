@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Bookings</title>
+    </head>
+    <body>
+        <h1>My Bookings</h1>
+
+        {% if bookings %}
+        <ul>
+            {% for booking in bookings %}
+            <li>
+                {{ booking.name }} - {{ booking.date }} at {{ booking.time }}
+                (<a href="{% url 'edit_booking' booking.id $}">Edit</a> | 
+                <a href="{% url 'delete_booking' bookind.id %}">Delete</a>)
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No bookings yet.</p>
+        {% endif %}
+
+        <p><a href="{% url 'home' %}">Back to Home</a></p>
+    </body>
+</html>
