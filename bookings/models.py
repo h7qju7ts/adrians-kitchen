@@ -4,6 +4,15 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Booking(models.Model):
+    """
+       This model stores the information for each table booking:
+
+       name, email, phone — who booked
+
+       date, time, people — when and how many
+
+       created_at — automatically added timestamp
+     """
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=20)
