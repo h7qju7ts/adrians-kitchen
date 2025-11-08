@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Book a Table</title>
+    </head>
+    <body>
+        <h1>Book a Table at Adrian's Kitchen</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Book Now</button>
+        </form>
+    <p><a href="{% url 'home' %}">Back to Home</a></p>
+
+    </body>
+</html>
