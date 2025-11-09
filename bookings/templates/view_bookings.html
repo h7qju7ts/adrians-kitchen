@@ -4,6 +4,13 @@
         <title>My Bookings</title>
     </head>
     <body>
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li style="color: green; font-weight: bold;">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
         <h1>My Bookings</h1>
 
         {% if bookings %}
