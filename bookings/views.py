@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Booking
 from .forms import BookingForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -13,6 +14,7 @@ def add_booking(request):
         form = BookingForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Your table has been booked Successfully!")
             return redirect('view_bookings')
     else:
         form = BookingForm()
