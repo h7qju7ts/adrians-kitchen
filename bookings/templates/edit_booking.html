@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Edit Booking</title>
+    </head>
+    <body>
+        <h1>Edit delete_booking</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save Changes</button>
+        </form>
+
+        <p><a href="{% url 'view_bookings' %}">Back to My Bookings</a></p>
+    </body>
+</html>
