@@ -1,18 +1,22 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Book a Table</title>
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <title>Book a Table - Adrian's Kitchen</title>
+    <link rel="stylesheet" href="{% static 'bookings/style.css' %}">
+</head>
+<body>
+    <div class="container">
         <h1>Book a Table at Adrian's Kitchen</h1>
 
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Book Now</button>
+            <button type="submit" class="button">Book Now</button>
         </form>
-    <p><a href="{% url 'home' %}">Back to Home</a></p>
 
-    </body>
+        <p><a href="{% url 'home' %}" class="button">Back to Home</a></p>
+    </div>
+</body>
 </html>

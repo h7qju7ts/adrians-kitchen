@@ -1,33 +1,39 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>My Bookings</title>
-    </head>
-    <body>
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li style="color: green; font-weight: bold;">{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
+<head>
+    <meta charset="UTF-8">
+    <title>My Bookings - Adrian's Kitchen</title>
+    <link rel="stylesheet" href="{% static 'bookings/style.css' %}">
+</head>
+<body>
+    <div class="container">
         <h1>My Bookings</h1>
 
-        {% if bookings %}
-        <ul>
-            {% for booking in bookings %}
-            <li>
-                {{ booking.name }} - {{ booking.date }} at {{ booking.time }}
-                (<a href="{% url 'edit_booking' booking.id $}">Edit</a> | 
-                <a href="{% url 'delete_booking' booking.id %}">Delete</a>)
-            </li>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="success">{{ message }}</li>
             {% endfor %}
         </ul>
-        {% else %}
-        <p>No bookings yet.</p>
         {% endif %}
 
-        <p><a href="{% url 'home' %}">Back to Home</a></p>
-    </body>
+        {% if bookings %}
+            <ul class="booking-list">
+                {% for booking in bookings %}
+                    <li>
+                        <strong>{{ booking.name }}</strong> - 
+                        {{ booking.date }} at {{ booking.time }}
+                        (<a href="{% url 'edit_booking' booking.id %}" class="link">Edit</a> | 
+                        <a href="{% url 'delete_booking' booking.id %}" class="link delete">Delete</a>)
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No bookings yet.</p>
+        {% endif %}
+
+        <p><a href="{% url 'home' %}" class="button">Back to Home</a></p>
+    </div>
+</body>
 </html>

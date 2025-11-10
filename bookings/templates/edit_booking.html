@@ -1,17 +1,22 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Edit Booking</title>
-    </head>
-    <body>
-        <h1>Edit delete_booking</h1>
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Booking - Adrian's Kitchen</title>
+    <link rel="stylesheet" href="{% static 'bookings/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Booking</h1>
+
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Save Changes</button>
+            <button type="submit" class="button">Save Changes</button>
         </form>
 
-        <p><a href="{% url 'view_bookings' %}">Back to My Bookings</a></p>
-    </body>
+        <p><a href="{% url 'view_bookings' %}" class="button">Back to My Bookings</a></p>
+    </div>
+</body>
 </html>

@@ -1,19 +1,23 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Cancel Booking</title>
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <title>Cancel Booking - Adrian's Kitchen</title>
+    <link rel="stylesheet" href="{% static 'bookings/style.css' %}">
+</head>
+<body>
+    <div class="container">
         <h1>Cancel Booking</h1>
 
         <p>Are you sure you want to cancel this booking?</p>
 
         <form method="POST">
             {% csrf_token %}
-            <button type="submit">Yes, delete it</button>
+            <button type="submit" class="button button-danger">Yes, delete it</button>
         </form>
 
-        <p><a href="{% url 'view_bookings' %}">Back</a></p>
-    </body>
+        <p><a href="{% url 'view_bookings' %}" class="button button-secondary">Back</a></p>
+    </div>
+</body>
 </html>

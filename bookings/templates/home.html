@@ -2,11 +2,14 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="{% static 'bookings/style.css' %}">
         <title>Adrian's Kitchen</title>
     </head>
     <body>
+        <div class="container">
         <h1>Welcome to Adrian's Kitchen</h1>
-        <p><a href="{% url 'add_booking' %}">Book a Table</a></p>
-        <p><a href="{% url 'view_bookings %'}">View My Bookings</a></p>
+        <p><a href="{% url 'add_booking' %}" class="button">Book a Table</a></p>
+        <p><a href="{% url 'view_bookings' %}" class="button">View My Bookings</a></p>
+        </div>
     </body>
 </html> 

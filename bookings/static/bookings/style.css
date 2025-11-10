@@ -7,3 +7,78 @@ body {
     text-align: center;
 }
 
+.container {
+    margin-top: 50px;
+}
+
+h1 {
+    color:#c0392b;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.button {
+    display: inline-block;
+    background-color: #c0392b;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #a93226;
+}
+
+form {
+    margin: 30px auto;
+    width: 300px;
+    text-align: left;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    width: 100%;
+    background-color: #c0392b;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #a93226;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+li a {
+    color: #c0392b;
+    margin: 0 5px;
+}
+
+li a:hover {
+    text-decoration: underline;
+}
