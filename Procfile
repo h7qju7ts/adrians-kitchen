@@ -1,1 +1,1 @@
-web: gunicorn adrians-kitchen.wsgi
+web: gunicorn adrians_kitchen.wsgi
