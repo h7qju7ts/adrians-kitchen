@@ -1,16 +1,10 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Cancel Booking - Adrian's Kitchen</title>
-    <link rel="stylesheet" href="{% static 'bookings/style.css' %}">
-</head>
-<body>
-    <div class="container">
-        <h1>Cancel Booking</h1>
+{% extends "base.html" %}
 
-        <p>Are you sure you want to cancel this booking?</p>
+{% block title %}Cancel Booking - Adrian's Kitchen{% endblock %}
+
+{% block content %}
+    <h2>Cancel Booking</h2>
+     <p>Are you sure you want to cancel this booking?</p>
 
         <form method="POST">
             {% csrf_token %}
@@ -18,6 +12,4 @@
         </form>
 
         <p><a href="{% url 'view_bookings' %}" class="button button-secondary">Back</a></p>
-    </div>
-</body>
-</html>
+{% endblock %}

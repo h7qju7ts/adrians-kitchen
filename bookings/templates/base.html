@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Adrian's Kitchen{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'bookings/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1><a href="{% url 'home' %}" style="text-decoration: none; color: #c0392b;">Adrian's Kitchen 🍽️</a></h1>
+
+        {% block content %}
+        <!-- Each page will put its unique content here -->
+        {% endblock %}
+    </div>
+</body>
+</html>
