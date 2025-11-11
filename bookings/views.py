@@ -18,11 +18,15 @@ def add_booking(request):
             return redirect('view_bookings')
     else:
         form = BookingForm()
-    return render(request, 'add_booking.html', {'form': form})        
+    return render(request, 'add_booking.html', {'form': form}) 
+
+
 
 def view_bookings(request):
     bookings = Booking.objects.all().order_by('-date', '-time')
     return render(request, 'view_bookings.html', {'bookings': bookings})
+
+
 
 def edit_booking(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
@@ -34,7 +38,9 @@ def edit_booking(request, booking_id):
             return redirect('view_bookings')
     else:
         form = BookingForm(instance=booking)
-    return render(request, 'edit_booking.html', {'form': form})        
+    return render(request, 'edit_booking.html', {'form': form})   
+
+     
 
 def delete_booking(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
