@@ -138,6 +138,12 @@ li a:hover {
     text-decoration: underline;
 }
 
+#del-conf {
+    color: red;
+    font-weight: bold;
+    font-size: larger;
+}
+
 .success {
     color: green;
     font-weight: bold;
