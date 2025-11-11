@@ -38,13 +38,13 @@ def register(request):
     return render(request, 'bookings/register.html', {'form': form})    
 
 
-
+@login_required
 def view_bookings(request):
     bookings = Booking.objects.all().order_by('-date', '-time')
     return render(request, 'bookings/view_bookings.html', {'bookings': bookings})
 
 
-
+@login_required
 def edit_booking(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
     if request.method == 'POST':
@@ -58,7 +58,7 @@ def edit_booking(request, booking_id):
     return render(request, 'bookings/edit_booking.html', {'form': form})   
 
 
-
+@login_required
 def delete_booking(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
     if request.method == 'POST':
