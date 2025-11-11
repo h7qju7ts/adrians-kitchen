@@ -16,11 +16,11 @@ def add_booking(request):
         form = BookingForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Your table has been booked Successfully!")
-            return redirect('bookings/view_bookings')
+            messages.success(request, "Your table has been booked successfully!")
+            return redirect('view_bookings')
     else:
         form = BookingForm()
-    return render(request, 'bookings/add_booking.html', {'form': form}) 
+    return render(request, 'bookings/add_booking.html', {'form': form})
 
 
 
@@ -30,7 +30,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            messages.success(request, "Registration Scuccessfull")
+            messages.success(request, "Registration successful!")
             return redirect("home")
     else:
         form = RegisterForm()
@@ -51,11 +51,11 @@ def edit_booking(request, booking_id):
         form = BookingForm(request.POST, instance=booking)
         if form.is_valid():
             form.save()
-            messages.success(request, "Your booking has been updated Successfully ")
-            return redirect('bookings/view_bookings')
+            messages.success(request, "Your booking has been updated successfully!")
+            return redirect('view_bookings')
     else:
         form = BookingForm(instance=booking)
-    return render(request, 'bookings/edit_booking.html', {'form': form})   
+    return render(request, 'bookings/edit_booking.html', {'form': form})  
 
 
 @login_required
@@ -63,8 +63,8 @@ def delete_booking(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
     if request.method == 'POST':
         booking.delete()
-        messages.success(request, "You have successfully cancelled the booking")
-        return redirect('bookings/view_bookings')
+        messages.success(request, "You have successfully cancelled the booking.")
+        return redirect('view_bookings')
     return render(request, 'bookings/delete_booking.html', {'booking': booking})
 
 
