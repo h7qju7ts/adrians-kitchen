@@ -34,17 +34,18 @@ def edit_booking(request, booking_id):
         form = BookingForm(request.POST, instance=booking)
         if form.is_valid():
             form.save()
-            messages.success(request, "Your booking has been updated successfully ")
+            messages.success(request, "Your booking has been updated Successfully ")
             return redirect('view_bookings')
     else:
         form = BookingForm(instance=booking)
     return render(request, 'edit_booking.html', {'form': form})   
 
-     
+
 
 def delete_booking(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
     if request.method == 'POST':
         booking.delete()
+        messages.success(request, "You have successfully cancelled the booking")
         return redirect('view_bookings')
     return render(request, 'delete_booking.html', {'booking': booking})
