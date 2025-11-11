@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Booking
-from .forms import BookingForm
+from .forms import BookingForm, RegisterForm
 from django.contrib import messages
+from django.contrib.auth import login
 
 # Create your views here.
 
@@ -19,6 +20,21 @@ def add_booking(request):
     else:
         form = BookingForm()
     return render(request, 'bookings/add_booking.html', {'form': form}) 
+
+
+
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, "Registration Scuccessfull")
+            return redirect("home")
+    else:
+        form = RegisterForm()
+
+    return render(request, 'bookings/register.html', {'form': form})    
 
 
 
@@ -49,3 +65,5 @@ def delete_booking(request, booking_id):
         messages.success(request, "You have successfully cancelled the booking")
         return redirect('bookings/view_bookings')
     return render(request, 'bookings/delete_booking.html', {'booking': booking})
+
+
