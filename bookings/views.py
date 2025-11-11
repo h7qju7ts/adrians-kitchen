@@ -6,7 +6,7 @@ from django.contrib import messages
 # Create your views here.
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'bookings/home.html')
 
 
 def add_booking(request):
@@ -15,16 +15,16 @@ def add_booking(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Your table has been booked Successfully!")
-            return redirect('view_bookings')
+            return redirect('bookings/view_bookings')
     else:
         form = BookingForm()
-    return render(request, 'add_booking.html', {'form': form}) 
+    return render(request, 'bookings/add_booking.html', {'form': form}) 
 
 
 
 def view_bookings(request):
     bookings = Booking.objects.all().order_by('-date', '-time')
-    return render(request, 'view_bookings.html', {'bookings': bookings})
+    return render(request, 'bookings/view_bookings.html', {'bookings': bookings})
 
 
 
@@ -35,10 +35,10 @@ def edit_booking(request, booking_id):
         if form.is_valid():
             form.save()
             messages.success(request, "Your booking has been updated Successfully ")
-            return redirect('view_bookings')
+            return redirect('bookings/view_bookings')
     else:
         form = BookingForm(instance=booking)
-    return render(request, 'edit_booking.html', {'form': form})   
+    return render(request, 'bookings/edit_booking.html', {'form': form})   
 
 
 
@@ -47,5 +47,5 @@ def delete_booking(request, booking_id):
     if request.method == 'POST':
         booking.delete()
         messages.success(request, "You have successfully cancelled the booking")
-        return redirect('view_bookings')
-    return render(request, 'delete_booking.html', {'booking': booking})
+        return redirect('bookings/view_bookings')
+    return render(request, 'bookings/delete_booking.html', {'booking': booking})
