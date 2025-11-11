@@ -156,3 +156,17 @@ li a:hover {
     margin-bottom: 15px;
 }
 
+.logout-button {
+    background: white;
+    border: none;
+    color: blueviolet;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+}
+
+.logout-button:hover {
+    color: red;
+}
+
