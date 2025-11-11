@@ -13,14 +13,19 @@ body {
     padding: 15px 0;
 }
 
-.navbar .container {
+
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .nav-logo {
-    font-size: 24px;
+    font-size: 36px;
     font-weight: bold;
     color: white;
     text-decoration: none;
@@ -35,23 +40,30 @@ body {
 }
 
 .nav-links li a {
-    color: white;
+    color: blueviolet;
     text-decoration: none;
     font-weight: bold;
+    font-size: 18px;
     transition: color 0.3s ease;
 }
 
-.nav-lonks li a:hover {
-    color: #fff2e6;
+.nav-links li a:hover {
+    color: red;
 }
 
+/* Page content container */
 .container {
-    margin-top: 50px;
+    margin: 50px auto;
+    max-width: 800px;
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 h1 {
     color:#c0392b;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     margin-bottom: 20px;
 }
 
@@ -63,9 +75,11 @@ a {
 .button {
     display: inline-block;
     background-color: #c0392b;
+    color: white;
     padding: 10px 20px;
     border-radius: 8px;
     transition: background-color 0.3s ease;
+    font-weight: bold;
 }
 
 .button:hover {
@@ -74,16 +88,18 @@ a {
 
 form {
     margin: 30px auto;
-    width: 300px;
+    width: 100%;
+    max-width: 350px;
     text-align: left;
 }
 
-form input, form select {
+form input,
+form select {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
+    padding: 10px;
+    margin-bottom: 12px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 6px;
 }
 
 form button {
@@ -91,9 +107,10 @@ form button {
     background-color: #c0392b;
     color: white;
     border: none;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 12px;
+    border-radius: 6px;
     cursor: pointer;
+    font-size: 16px;
 }
 
 form button:hover {
@@ -108,8 +125,8 @@ ul {
 li {
     margin: 10px 0;
     background: #f9f9f9;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 12px;
+    border-radius: 6px;
 }
 
 li a {
@@ -119,4 +136,9 @@ li a {
 
 li a:hover {
     text-decoration: underline;
+}
+
+.success {
+    color: green;
+    font-weight: bold;
 }

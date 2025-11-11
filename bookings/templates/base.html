@@ -9,15 +9,16 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="container">
-            <a href="{% url 'home' %}" class="nav-logo">Adrian's Kitchen</a>
-            <ul class="nav-links">
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'add_booking' %}">Book a Table</a></li>
-                <li><a href="{% url 'view_bookings' %}">My Bookings</a></li>
-            </ul>
-        </div>
-    </nav>
+    <div class="nav-container">
+        <a href="{% url 'home' %}" class="nav-logo">Adrian's Kitchen</a>
+
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'add_booking' %}">Book a Table</a></li>
+            <li><a href="{% url 'view_bookings' %}">My Bookings</a></li>
+        </ul>
+    </div>
+</nav>
     <div class="container">
         <h1><a href="{% url 'home' %}" style="text-decoration: none; color: #c0392b;">Adrian's Kitchen 🍽️</a></h1>
 
