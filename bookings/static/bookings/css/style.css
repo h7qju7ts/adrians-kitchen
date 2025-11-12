@@ -1,0 +1,195 @@
+/* ====== Global Styles ====== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fff8f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+
+/* ===== NAVBAR ===== */
+.navbar {
+    background-color: rgb(252, 141, 15);
+    width: 100%;
+    padding: 12px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+/* Navbar links/buttons unified */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 3px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.nav-links li {
+    display: flex;
+    align-items: center;
+}
+
+/* Unified button style for <a> and <button> */
+.nav-btn {
+    background-color: rgb(252, 141, 15);
+    color: rgb(235, 252, 2);
+    font-weight: 720;
+    font-size: 17px;
+    border: 2px solid rgb(252, 141, 15);
+    border-radius: 14px;
+    padding: 6px 7px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.nav-btn:hover {
+    background-color: white;
+    color: rgb(252, 141, 15);
+    transform: translateY(-1px);
+}
+
+/* Keep logout form inline */
+.nav-form {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+/* ====== Lists ====== */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+    background: rgb(252, 141, 15);
+    padding: 10px;
+    border-radius: 6px;
+}
+
+/* ====== Page Container ====== */
+.container {
+    margin: 50px auto;
+    max-width: 800px;
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* ====== Headings ====== */
+h1, h2, h3 {
+    color: #c0392b;
+    margin-bottom: 20px;
+}
+
+/* ====== Buttons ====== */
+.button {
+    display: inline-block;
+    background-color: #e67e22;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #a93226;
+}
+
+/* ====== Forms ====== */
+form {
+    margin: 30px auto;
+    width: 100%;
+    max-width: 400px;
+    text-align: left;
+}
+
+form input,
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+form button {
+    width: 100%;
+    background-color: #c0392b;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+form button:hover {
+    background-color: #a93226;
+}
+
+
+/* ====== Messages ====== */
+.success {
+    color: green;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+#del-conf {
+    color: red;
+    font-weight: bold;
+    font-size: larger;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+}

@@ -23,8 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(+(gb7nis48j@6(90*t_wwh7qv6$i(j5*v-f7w=6(jdi+r22y%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+DEBUG = False
 ALLOWED_HOSTS = [
     'kitchen-adrian-84c5bb99022c.herokuapp.com', '127.0.0.1',
 ]
@@ -121,14 +120,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'bookings/static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+import os
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'bookings' / 'static'
+]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
