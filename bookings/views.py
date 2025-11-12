@@ -15,9 +15,11 @@ def add_booking(request):
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, "Your table has been booked successfully!")
-            return redirect('view_bookings')
+           booking = form.save(commit=False)
+           booking.user = request.user
+           booking.save()
+           messages.success(request, "Your table has been booked successfully!")
+           return redirect('view_bookings')
     else:
         form = BookingForm()
     return render(request, 'bookings/add_booking.html', {'form': form})

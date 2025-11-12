@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ['name', 'email', 'phone', 'date', 'time', 'people']
+        fields = ['name', 'date', 'time', 'guests']
         widgets = {
             'date': forms.DateInput(attrs={'type': 'date'}),
             'time': forms.TimeInput(attrs={'type': 'time'}),
