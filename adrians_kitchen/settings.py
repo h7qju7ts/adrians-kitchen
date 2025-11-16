@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-(+(gb7nis48j@6(90*t_wwh7qv6$i(j5*v-f7w=6(jdi+r22y%
 # Debug mode:
 # - True: for development (shows detailed errors)
 # - False: for production (hides errors from users)
-DEBUG = False
+DEBUG = True
 
 # Your allowed domains:
 # Django will only respond to requests coming from these addresses.
@@ -224,3 +224,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'username_email'   # Login using username OR ema
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'optional'            # Options: 'mandatory', 'optional', 'none'
 ACCOUNT_USERNAME_REQUIRED = True
+
+
+# Email backend 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
