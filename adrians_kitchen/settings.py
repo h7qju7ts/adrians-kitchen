@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-(+(gb7nis48j@6(90*t_wwh7qv6$i(j5*v-f7w=6(jdi+r22y%
 # Debug mode:
 # - True: for development (shows detailed errors)
 # - False: for production (hides errors from users)
-DEBUG = True
+DEBUG = False
 
 # Your allowed domains:
 # Django will only respond to requests coming from these addresses.
