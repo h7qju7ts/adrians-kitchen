@@ -1,18 +1,15 @@
 {% extends "bookings/base.html" %}
-{% load i18n %}
 
 {% block title %}Confirm Email{% endblock %}
 
 {% block content %}
-<h2>Confirm Your Email</h2>
+<h2>Email Confirmation</h2>
 
-<p>Hi! Please confirm that <strong>{{ email_address.email }}</strong> belongs to you.</p>
+<p>Please confirm your email address by clicking the button below.</p>
 
 <form method="POST" action="{% url 'account_confirm_email' confirmation.key %}">
     {% csrf_token %}
     <button type="submit" class="button">Confirm Email</button>
 </form>
-
-<p>If this link is expired, you can request a new one from your account settings.</p>
 
 {% endblock %}

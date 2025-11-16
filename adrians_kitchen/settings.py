@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-(+(gb7nis48j@6(90*t_wwh7qv6$i(j5*v-f7w=6(jdi+r22y%
 # Debug mode:
 # - True: for development (shows detailed errors)
 # - False: for production (hides errors from users)
-DEBUG = False
+DEBUG = True
 
 # Your allowed domains:
 # Django will only respond to requests coming from these addresses.
@@ -199,7 +199,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # LOGIN / LOGOUT SETTINGS
 # -------------------------------------------------------------------------
 # Where users go after login/logout
-LOGIN_URL = 'login'
+LOGIN_URL = 'account_login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
