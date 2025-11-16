@@ -16,10 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('bookings.urls')),
+
+    # Allauth handles login, logout, register, password reset, etc.
     path('accounts/', include('allauth.urls')),
+
+    # The app's pages
+    path('', include('bookings.urls')),
 ]
