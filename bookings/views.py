@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Booking
-from .forms import BookingForm, RegisterForm
+from .forms import BookingForm
 from django.contrib import messages
 from django.contrib.auth import login
 
@@ -24,20 +24,6 @@ def add_booking(request):
         form = BookingForm()
     return render(request, 'bookings/add_booking.html', {'form': form})
 
-
-
-def register(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            messages.success(request, "Registration successful!")
-            return redirect("home")
-    else:
-        form = RegisterForm()
-
-    return render(request, 'bookings/register.html', {'form': form})    
 
 
 @login_required
