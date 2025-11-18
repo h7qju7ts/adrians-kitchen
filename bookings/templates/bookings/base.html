@@ -5,53 +5,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Adrian's Kitchen{% endblock %}</title>
-    
-    <!-- Static CSS -->
+
     <link rel="stylesheet" href="{% static 'bookings/css/style.css' %}">
-    <!-- favicon -->
-     <link rel="icon" href="{% static 'bookings/images/favicon/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'bookings/images/favicon/favicon.ico' %}" type="image/x-icon">
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="{% url 'home' %}" class="nav-logo">Adrian's Kitchen</a>
 
-            <ul class="nav-links">
-                <li><a href="{% url 'home' %}" class="nav-btn">Home</a></li>
-                <li><a href="{% url 'add_booking' %}" class="nav-btn">Book a Table</a></li>
-                <li><a href="{% url 'view_bookings' %}" class="nav-btn">My Bookings</a></li>
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-container">
 
-                {% if user.is_authenticated %}
-                    <li>
-                        <form action="{% url 'account_logout' %}" method="POST" class="nav-form">
-                            {% csrf_token %}
-                            <button type="submit" class="nav-btn">Logout</button>
-                        </form>
-                    </li>
-                {% else %}
-                    <li><a href="{% url 'account_login' %}" class="nav-btn">Login</a></li>
-                    <li><a href="{% url 'account_signup' %}" class="nav-btn">Register</a></li>
-                {% endif %}
-            </ul>
-        </div>
-    </nav>
+        <!-- Logo -->
+        <a href="{% url 'home' %}" class="nav-logo">Adrian's Kitchen</a>
 
-    <!-- Flash messages -->
-    {% if messages %}
-        <div class="messages">
-            {% for message in messages %}
-                <p class="{{ message.tags }}">{{ message }}</p>
-            {% endfor %}
-        </div>
-    {% endif %}
+        <!-- DESKTOP NAV LINKS -->
+        <ul class="desktop-nav-links">
+            <li><a href="{% url 'home' %}" class="nav-btn">Home</a></li>
+            <li><a href="{% url 'add_booking' %}" class="nav-btn">Book a Table</a></li>
+            <li><a href="{% url 'view_bookings' %}" class="nav-btn">My Bookings</a></li>
 
-    <!-- Page content area -->
-    <main class="container">
-        {% block content %}
-        <!-- Each page will put its unique content here -->
-        {% endblock %}
-    </main>
+            {% if user.is_authenticated %}
+                <li>
+                    <form action="{% url 'account_logout' %}" method="POST" class="nav-form">
+                        {% csrf_token %}
+                        <button type="submit" class="nav-btn">Logout</button>
+                    </form>
+                </li>
+            {% else %}
+                <li><a href="{% url 'account_login' %}" class="nav-btn">Login</a></li>
+                <li><a href="{% url 'account_signup' %}" class="nav-btn">Register</a></li>
+            {% endif %}
+        </ul>
+
+        <!-- MOBILE HAMBURGER -->
+        <button class="nav-toggle" id="nav-toggle">☰</button>
+    </div>
+</nav>
+
+<!-- MOBILE SLIDE-OUT MENU -->
+<div id="side-menu" class="side-menu">
+    <button id="close-menu" class="close-btn">✕</button>
+
+    <ul class="side-links">
+        <li><a href="{% url 'home' %}" class="nav-btn">Home</a></li>
+        <li><a href="{% url 'add_booking' %}" class="nav-btn">Book a Table</a></li>
+        <li><a href="{% url 'view_bookings' %}" class="nav-btn">My Bookings</a></li>
+
+        {% if user.is_authenticated %}
+            <li>
+                <form action="{% url 'account_logout' %}" method="POST" class="nav-form">
+                    {% csrf_token %}
+                    <button type="submit" class="nav-btn">Logout</button>
+                </form>
+            </li>
+        {% else %}
+            <li><a href="{% url 'account_login' %}" class="nav-btn">Login</a></li>
+            <li><a href="{% url 'account_signup' %}" class="nav-btn">Register</a></li>
+        {% endif %}
+    </ul>
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+    const menuBtn = document.getElementById("nav-toggle");
+    const sideMenu = document.getElementById("side-menu");
+    const closeBtn = document.getElementById("close-menu");
+
+    // Open sidebar
+    menuBtn.addEventListener("click", () => {
+        sideMenu.classList.add("open");
+    });
+
+    // Close sidebar
+    closeBtn.addEventListener("click", () => {
+        sideMenu.classList.remove("open");
+    });
+
+    // Click outside to close
+    document.addEventListener("click", (e) => {
+        if (!sideMenu.contains(e.target) && e.target !== menuBtn) {
+            sideMenu.classList.remove("open");
+        }
+    });
+</script>
+
+<!-- PAGE CONTENT -->
+<main class="container">
+    {% block content %}
+    {% endblock %}
+</main>
+
 </body>
 </html>
