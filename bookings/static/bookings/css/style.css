@@ -60,6 +60,7 @@ main li {
     font-weight: bold;
     color: white;
     text-decoration: none;
+    margin-right: auto;
 }
 
 /* =========================================================
@@ -70,6 +71,7 @@ main li {
     display: flex;
     gap: 25px;
     align-items: center;
+    margin-left: auto;
 }
 
 .desktop-nav-links li {
@@ -105,6 +107,15 @@ main li {
 
 .nav-form {
     display: inline;
+}
+
+.page-container {
+    margin: 50px auto;
+    max-width: 800px;
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 /* =========================================================
@@ -163,17 +174,7 @@ main li {
     margin: 0 !important;
 }
 
-/* =========================================================
-   PAGE CONTENT
-========================================================= */
-.container {
-    margin: 50px auto;
-    max-width: 800px;
-    background: #fff;
-    padding: 30px 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
+
 
 /* =========================================================
    HOMEPAGE BUTTON CONTAINER
@@ -259,6 +260,71 @@ form input[type="submit"]:hover {
     background-color: #a93226;
 }
 
+.carousel-inner img {
+    object-fit: cover;
+    height: 260px;
+}
+
+/* Center Allauth help links */
+.login,
+.signup,
+.account,
+.password_reset {
+    text-align: center !important;
+}
+
+.login p,
+.signup p,
+.account p,
+.password_reset p {
+    margin-top: 10px;
+    text-align: center !important; 
+}
+
+/* Align Allauth "Register here" / "Reset it" links with the form */
+.page-container form + p,
+.page-container form + p + p {
+    max-width: 400px;        /* same as form */
+    margin: 10px auto 0;     /* center horizontally */
+    text-align: center;      /* center the text itself */
+}
+
+/* AUTH CARD WRAPPER */
+.auth-card {
+    max-width: 550px;
+    background: #ffffff;
+    border-radius: 16px;
+}
+
+/* ORANGE BUTTON */
+.auth-btn {
+    background-color: rgb(252, 141, 15) !important;
+    color: white !important;
+    border: none !important;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 12px 16px;
+    border-radius: 8px;
+}
+.auth-btn:hover {
+    background-color: #8f030a !important;
+}
+
+/* FORM ERROR BOXES */
+.form-error {
+    background: #ff6600;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    margin-top: 6px;
+    font-size: 14px;
+}
+
+/* ALIGN BOTTOM LINKS */
+.auth-card p {
+    text-align: center !important;
+    margin-top: 10px !important;
+}
 /* =========================================================
    RESPONSIVE
 ========================================================= */
@@ -276,9 +342,11 @@ form input[type="submit"]:hover {
         display: block;
     }
 
-    .container {
-        width: 90%;
-        padding: 20px;
+   
+
+
+     .carousel-inner img {
+        height: 180px;
     }
 }
 
@@ -295,3 +363,4 @@ form input[type="submit"]:hover {
         display: none !important;
     }
 }
+

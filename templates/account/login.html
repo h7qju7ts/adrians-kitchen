@@ -1,25 +1,67 @@
 {% extends "bookings/base.html" %}
-
+{% load i18n %}
 {% block title %}Login – Adrian's Kitchen{% endblock %}
 
 {% block content %}
-<h2>Login to Your Account</h2>
 
-<form method="POST" action="{% url 'account_login' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
+<div class="auth-card shadow-sm p-4 mx-auto mt-4">
+    <h2 class="text-center mb-4 fw-bold">Login to Your Account</h2>
 
-    <button type="submit" class="button">Login</button>
-</form>
+    <form method="POST" action="{% url 'account_login' %}">
+        {% csrf_token %}
 
-<p>
-    Don’t have an account?  
-    <a href="{% url 'account_signup' %}">Register here</a>
-</p>
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+        {% endif %}
 
-<p>
-    Forgot your password?  
-    <a href="{% url 'account_reset_password' %}">Reset it</a>
-</p>
+        <!-- LOGIN FIELD -->
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Login</label>
+            {{ form.login }}
+            {% for error in form.login.errors %}
+                <div class="form-error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Password</label>
+            {{ form.password }}
+            {% for error in form.password.errors %}
+                <div class="form-error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- Forgot password link -->
+        <div class="mb-3 text-end">
+            <a href="{% url 'account_reset_password' %}" class="text-decoration-none">
+                Forgot your password?
+            </a>
+        </div>
+
+        <!-- REMEMBER ME -->
+        <div class="form-check mb-3">
+            {{ form.remember }}
+            <label class="form-check-label fw-semibold">Remember Me</label>
+        </div>
+
+        <!-- BUTTON -->
+        <button type="submit" class="btn auth-btn w-100">Login</button>
+
+    </form>
+
+    <!-- EXTRA LINKS -->
+    <div class="text-center mt-4">
+        <p>
+            Don’t have an account?
+            <a href="{% url 'account_signup' %}">Register here</a>
+        </p>
+        <p>
+            Forgot your password?
+            <a href="{% url 'account_reset_password' %}">Reset it</a>
+        </p>
+    </div>
+
+</div>
 
 {% endblock %}

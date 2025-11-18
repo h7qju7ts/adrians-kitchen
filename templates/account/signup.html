@@ -1,20 +1,48 @@
 {% extends "bookings/base.html" %}
-
+{% load i18n %}
 {% block title %}Register – Adrian's Kitchen{% endblock %}
 
 {% block content %}
-<h2>Create Your Account</h2>
 
-<form method="POST" action="{% url 'account_signup' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
+<div class="auth-card shadow-sm p-4 mx-auto mt-4">
+    <h2 class="text-center mb-4 fw-bold">Create Your Account</h2>
 
-    <button type="submit" class="button">Sign Up</button>
-</form>
+    <form method="POST" action="{% url 'account_signup' %}">
+        {% csrf_token %}
 
-<p>
-    Already have an account?  
-    <a href="{% url 'account_login' %}">Login here</a>
-</p>
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        <!-- Loop through fields manually for cleaner control -->
+        {% for field in form %}
+            <div class="mb-3">
+                <label class="form-label fw-semibold">{{ field.label }}</label>
+                {{ field }}
+
+                {% if field.help_text %}
+                <div class="form-text text-muted small">
+                    {{ field.help_text|safe }}
+                </div>
+                {% endif %}
+
+                {% for error in field.errors %}
+                    <div class="form-error">{{ error }}</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn auth-btn w-100">Sign Up</button>
+    </form>
+
+    <div class="text-center mt-4">
+        <p>
+            Already have an account?
+            <a href="{% url 'account_login' %}">Login here</a>
+        </p>
+    </div>
+
+</div>
 
 {% endblock %}

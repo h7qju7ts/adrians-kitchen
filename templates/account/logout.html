@@ -5,4 +5,27 @@
 <h2>You have been logged out.</h2>
 
 <p><a class="button" href="{% url 'home' %}">Return to Home</a></p>
+{% endblock %}{% extends "bookings/base.html" %}
+{% load i18n %}
+{% block title %}Logged Out – Adrian's Kitchen{% endblock %}
+
+{% block content %}
+
+<div class="auth-card shadow-sm p-4 mx-auto mt-4">
+
+    <h2 class="text-center mb-3 fw-bold">You have been logged out</h2>
+
+    <p class="text-center mb-4">
+        Thanks for visiting Adrian's Kitchen!  
+        We hope to see you again soon.
+    </p>
+
+    <div class="text-center">
+        <a href="{% url 'home' %}" class="btn auth-btn w-100">
+            Return to Home
+        </a>
+    </div>
+
+</div>
+
 {% endblock %}
