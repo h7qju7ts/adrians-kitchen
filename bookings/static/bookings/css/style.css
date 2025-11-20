@@ -1,149 +1,124 @@
 /* =========================================================
-   GLOBAL
+   GLOBAL BASE STYLING
 ========================================================= */
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #fff8f0;
     color: #333;
     margin: 0;
     padding: 0;
-    text-align: center;
-}
-
-.navbar, .nav-container, .side-menu {
-    max-width: 100%;
 }
 
 html, body {
     overflow-x: hidden;
 }
 
-/* REMOVE ALL BULLET POINTS GLOBALLY */
 ul, li {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-/* Only apply orange boxes to CONTENT lists, not navbar */
-main li {
-    margin: 10px 0;
-    background: rgb(252, 141, 15);
-    padding: 10px;
-    border-radius: 6px;
-}
 
 /* =========================================================
    NAVBAR
 ========================================================= */
 .navbar {
-    background-color: rgb(252, 141, 15);
+    background: rgb(252, 141, 15);
     width: 100%;
     padding: 12px 0;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .nav-container {
-    max-width: 1450px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 10px;
+    padding: 0 30px;
+
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+}
+.page-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 20px;
 }
 
+
+/* LOGO */
 .nav-logo {
-    font-size: 50px;
+    font-size: 48px;
     font-weight: bold;
     color: white;
     text-decoration: none;
-    margin-right: auto;
+    white-space: nowrap;
 }
 
-/* =========================================================
-   DESKTOP NAV LINKS
-========================================================= */
-
+/* DESKTOP NAV LINKS */
 .desktop-nav-links {
     display: flex;
-    gap: 25px;
-    align-items: center;
+    gap: 30px;
     margin-left: auto;
 }
 
-.desktop-nav-links li {
-    background: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-/* Remove accidental bullet dots */
-.desktop-nav-links li::marker {
-    content: "";
-}
-
-/* Button styling */
-.nav-btn {
-    background-color: rgb(252, 141, 15);
-    color: rgb(235, 252, 2);
-    font-weight: 720;
+.desktop-nav-links a,
+.desktop-nav-links button {
     font-size: 17px;
-    border: 2px solid rgb(252, 141, 15);
-    border-radius: 14px;
-    padding: 6px 12px;
+    font-weight: 700;
+    background: transparent;
+    border: none;
+    color: rgb(235, 252, 2);
+    padding: 6px 10px;
+    border-radius: 6px;
     cursor: pointer;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: 0.25s;
 }
 
-.nav-btn:hover {
-    background-color: white;
+.desktop-nav-links a:hover,
+.desktop-nav-links button:hover {
+    background: white;
     color: rgb(252, 141, 15);
-    transform: translateY(-1px);
 }
 
+/* LOGOUT form inline */
 .nav-form {
     display: inline;
 }
 
-.page-container {
-    margin: 50px auto;
-    max-width: 800px;
-    background: #fff;
-    padding: 30px 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-/* =========================================================
-   MOBILE HAMBURGER
-========================================================= */
+/* Hamburger button */
 .nav-toggle {
     display: none;
     background: none;
     border: none;
     color: white;
-    font-size: 32px;
+    font-size: 35px;
     cursor: pointer;
 }
 
+
 /* =========================================================
-   MOBILE SLIDE-OUT MENU
+   MOBILE SIDE MENU
 ========================================================= */
 .side-menu {
     position: fixed;
     top: 0;
-    right: -300px; /* Hide fully */
-    width: 260px;
+    right: -280px;
+    width: 240px;
     height: 100%;
     background: rgb(252, 141, 15);
     padding-top: 80px;
     padding-left: 20px;
-    box-shadow: -3px 0 10px rgba(0,0,0,0.25);
-    transition: right 0.35s ease;
+    transition: 0.4s ease;
+    box-shadow: -3px 0 10px rgba(0,0,0,0.3);
     z-index: 2000;
 }
 
@@ -155,10 +130,10 @@ main li {
     position: absolute;
     top: 20px;
     right: 20px;
+    font-size: 32px;
     background: none;
     border: none;
     color: white;
-    font-size: 30px;
     cursor: pointer;
 }
 
@@ -168,61 +143,107 @@ main li {
     gap: 20px;
 }
 
-.side-links li {
-    background: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
+.side-links a,
+.side-links button {
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    padding: 6px;
+    color: rgb(235, 252, 2);
 }
-
 
 
 /* =========================================================
-   HOMEPAGE BUTTON CONTAINER
+   BUTTON SYSTEM (Bootstrap-style)
 ========================================================= */
-
-.home-buttons-container {
-    margin: 60px auto;
-    width: 80%;
-    max-width: 900px;
-    background: #fff;
-    padding: 50px 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-/* Homepage buttons */
-.home-btn {
+.btn {
     display: inline-block;
-    margin: 15px auto;
-    padding: 12px 24px;
-    background-color: rgb(252, 141, 15);
-    color: #fff;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 10px;
+    padding: 12px 22px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 8px;
     text-decoration: none;
+    cursor: pointer;
+    border: none;
     transition: 0.25s ease;
 }
 
-.home-btn:hover {
-    background-color: #c0392b;
+/* Primary = Orange */
+.btn-primary {
+    background: rgb(252, 141, 15);
+    color: white;
+}
+.btn-primary:hover {
+    background: #c0392b;
+    color: white;
 }
 
-/* =========================================================
-   FORMS (Restored styling)
-========================================================= */
+/* Secondary = White w/ orange border */
+.btn-secondary {
+    background: white;
+    border: 2px solid rgb(252, 141, 15);
+    color: rgb(252, 141, 15);
+}
+.btn-secondary:hover {
+    background: rgb(252, 141, 15);
+    color: white;
+}
 
+/* Outline button */
+.btn-outline {
+    background: transparent;
+    border: 2px solid rgb(252, 141, 15);
+    color: rgb(252, 141, 15);
+}
+.btn-outline:hover {
+    background: rgb(252, 141, 15);
+    color: white;
+}
+
+
+
+/* =========================================================
+   PAGE CONTAINERS
+========================================================= */
+.container,
+.page-container {
+    max-width: 950px;
+    margin: 40px auto;
+    padding: 35px 40px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    text-align: center; /* , page centered */
+}
+
+
+/* =========================================================
+   HOMEPAGE (SPECIAL)
+========================================================= */
+.page-container h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.page-container p {
+    margin: 20px 0;
+}
+
+
+
+/* =========================================================
+   FORMS / ALLAUTH
+========================================================= */
 form {
-    margin: 30px auto;
-    width: 100%;
     max-width: 400px;
+    margin: 0 auto;
     text-align: left;
 }
 
 form label {
-    font-weight: bold;
-    color: #444;
+    font-weight: 600;
 }
 
 form input,
@@ -231,9 +252,9 @@ form textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 12px;
-    border: 1px solid #ccc;
+    border: 1px solid #aaa;
     border-radius: 6px;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 form input[type="checkbox"] {
@@ -244,123 +265,77 @@ form input[type="checkbox"] {
 form button,
 form input[type="submit"] {
     width: 100%;
-    background-color: rgb(252, 141, 15);
+    background: rgb(252, 141, 15);
     color: white;
-    font-weight:750;
-    border: none;
     padding: 12px;
     border-radius: 6px;
+    font-weight: 700;
     cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
 }
 
-form button:hover,
-form input[type="submit"]:hover {
-    background-color: #a93226;
+form button:hover {
+    background: #c0392b;
 }
 
-.carousel-inner img {
-    object-fit: cover;
-    height: 260px;
-}
 
-/* Center Allauth help links */
-.login,
-.signup,
-.account,
-.password_reset {
-    text-align: center !important;
-}
-
+/* Center “register here / reset it” text */
 .login p,
 .signup p,
 .account p,
 .password_reset p {
-    margin-top: 10px;
-    text-align: center !important; 
-}
-
-/* Align Allauth "Register here" / "Reset it" links with the form */
-.page-container form + p,
-.page-container form + p + p {
-    max-width: 400px;        /* same as form */
-    margin: 10px auto 0;     /* center horizontally */
-    text-align: center;      /* center the text itself */
-}
-
-/* AUTH CARD WRAPPER */
-.auth-card {
-    max-width: 550px;
-    background: #ffffff;
-    border-radius: 16px;
-}
-
-/* ORANGE BUTTON */
-.auth-btn {
-    background-color: rgb(252, 141, 15) !important;
-    color: white !important;
-    border: none !important;
-    font-size: 18px;
-    font-weight: 700;
-    padding: 12px 16px;
-    border-radius: 8px;
-}
-.auth-btn:hover {
-    background-color: #8f030a !important;
-}
-
-/* FORM ERROR BOXES */
-.form-error {
-    background: #ff6600;
-    color: white;
-    padding: 6px 10px;
-    border-radius: 6px;
-    margin-top: 6px;
-    font-size: 14px;
-}
-
-/* ALIGN BOTTOM LINKS */
-.auth-card p {
     text-align: center !important;
-    margin-top: 10px !important;
 }
+
+
+/* =========================================================
+   AUTH CARD (Login/Register/Reset)
+========================================================= */
+.auth-card {
+    max-width: 450px;
+    margin: 40px auto;
+    padding: 35px 40px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.auth-card h2 {
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+.auth-card p a {
+    color: rgb(252, 141, 15);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-card p a:hover {
+    text-decoration: underline;
+}
+
+
 /* =========================================================
    RESPONSIVE
 ========================================================= */
+@media (max-width: 900px) {
 
-/* MOBILE < 768px */
-@media (max-width: 768px) {
-
-    /* Hide desktop menu */
     .desktop-nav-links {
         display: none;
     }
 
-    /* Show hamburger */
     .nav-toggle {
         display: block;
     }
 
-   
+    .nav-logo {
+        font-size: 40px;
+    }
 
-
-     .carousel-inner img {
-        height: 180px;
+    .page-container,
+    .container {
+        padding: 25px 20px;
+        width: 90%;
     }
 }
-
-/* DESKTOP >= 769px */
-@media (min-width: 769px) {
-
-    /* Hide slide-out menu completely */
-    .side-menu {
-        display: none !important;
-    }
-
-    /* Hide hamburger on desktop */
-    .nav-toggle {
-        display: none !important;
-    }
-}
-

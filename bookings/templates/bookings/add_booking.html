@@ -1,13 +1,20 @@
 {% extends "bookings/base.html" %}
 
-{% block title %}Book a Table - Adrian's Kitchen{% endblock %}
+{% block title %}Book a Table – Adrian's Kitchen{% endblock %}
 
 {% block content %}
-    <h2>Book a Table</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="button">Book Now</button>
-    </form>
-    <p><a href="{% url 'home' %}" class="button">Back to Home</a></p>
+
+<h2 class="mb-3">Book a Table</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-primary w-100">Book Now</button>
+</form>
+
+<p class="mt-3 text-center">
+    <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+</p>
+
 {% endblock %}

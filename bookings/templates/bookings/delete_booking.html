@@ -1,15 +1,20 @@
 {% extends "bookings/base.html" %}
 
-{% block title %}Cancel Booking - Adrian's Kitchen{% endblock %}
+{% block title %}Cancel Booking – Adrian's Kitchen{% endblock %}
 
 {% block content %}
-    <h2>Cancel Booking</h2>
-     <p id="del-conf">Are you sure you want to cancel this booking?</p>
 
-        <form method="POST">
-            {% csrf_token %}
-            <button type="submit" class="button button-danger">Yes, cancel it</button>
-        </form>
+<h2 class="mb-3">Cancel Booking</h2>
 
-        <p><a href="{% url 'view_bookings' %}" class="button button-secondary">Back</a></p>
+<p id="del-conf">Are you sure you want to cancel this booking?</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger w-100">Yes, cancel it</button>
+</form>
+
+<p class="mt-3 text-center">
+    <a href="{% url 'view_bookings' %}" class="btn btn-secondary">Back</a>
+</p>
+
 {% endblock %}
