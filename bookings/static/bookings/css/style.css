@@ -89,6 +89,7 @@ ul, li {
     color: rgb(252, 141, 15);
 }
 
+
 /* LOGOUT form inline */
 .nav-form {
     display: inline;
@@ -182,13 +183,23 @@ ul, li {
 
 /* Secondary = White w/ orange border */
 .btn-secondary {
-    background: white;
-    border: 2px solid rgb(252, 141, 15);
-    color: rgb(252, 141, 15);
-}
-.btn-secondary:hover {
     background: rgb(252, 141, 15);
     color: white;
+}
+.btn-secondary:hover {
+    background: #c0392b;
+    color: white;
+}
+
+/*  "Danger" buttons */
+.btn-danger {
+    background: rgb(252, 141, 15);
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover {
+    background: #c0392b;
 }
 
 /* Outline button */
@@ -229,6 +240,22 @@ ul, li {
 
 .page-container p {
     margin: 20px 0;
+}
+
+/* Carousel section */
+.carousel-item img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+}
+
+.carousel-item {
+    display: none;
+    transition: transform 0.6s ease-in-out;
+}
+
+.carousel-item.active {
+    display: block;
 }
 
 
@@ -277,6 +304,12 @@ form button:hover {
     background: #c0392b;
 }
 
+/*  Successfull action message */
+.alert-success {
+    color: green !important;
+    font-weight: bolder;
+}
+
 
 /* Center “register here / reset it” text */
 .login p,
@@ -313,6 +346,45 @@ form button:hover {
 
 .auth-card p a:hover {
     text-decoration: underline;
+}
+
+/* Style for the password section */
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 40px;
+}
+
+.toggle-password {
+    all: unset;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-78%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #555;
+}
+
+
+/* .toggle-password:hover {
+    color: rgb(252, 141, 15);
+} */
+
+.password-rules p {
+    font-size: 14px;
+    color: #b10000;
+    margin-top: 5px;
+}
+.form-error {
+    color: #b10000;
+    font-size: 14px;
+    margin-top: 5px;
 }
 
 

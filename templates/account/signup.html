@@ -1,5 +1,6 @@
 {% extends "bookings/base.html" %}
 {% load i18n %}
+
 {% block title %}Register – Adrian's Kitchen{% endblock %}
 
 {% block content %}
@@ -14,35 +15,44 @@
             <div class="alert alert-danger">{{ form.non_field_errors }}</div>
         {% endif %}
 
-        <!-- Loop through fields manually for cleaner control -->
         {% for field in form %}
-            <div class="mb-3">
-                <label class="form-label fw-semibold">{{ field.label }}</label>
-                {{ field }}
+        <div class="mb-3">
 
-                {% if field.help_text %}
+            <label class="form-label fw-semibold">{{ field.label }}</label>
+
+            {% if field.name == "password1" or field.name == "password2" %}
+                <div class="password-wrapper">
+                    {{ field }}
+                    <button type="button"
+                            class="toggle-password"
+                            data-target="{{ field.id_for_label }}">
+                        👁
+                    </button>
+                </div>
+            {% else %}
+                {{ field }}
+            {% endif %}
+
+            {% if field.help_text %}
                 <div class="form-text text-muted small">
                     {{ field.help_text|safe }}
                 </div>
-                {% endif %}
+            {% endif %}
 
-                {% for error in field.errors %}
-                    <div class="form-error">{{ error }}</div>
-                {% endfor %}
-            </div>
+            {% for error in field.errors %}
+                <div class="form-error">{{ error }}</div>
+            {% endfor %}
+
+        </div>
         {% endfor %}
 
-        <!-- Submit Button -->
         <button type="submit" class="btn auth-btn w-100">Sign Up</button>
     </form>
 
-    <div class="text-center mt-4">
-        <p>
-            Already have an account?
-            <a href="{% url 'account_login' %}">Login here</a>
-        </p>
-    </div>
-
+    <p class="text-center mt-3">
+        Already have an account?
+        <a href="{% url 'account_login' %}">Login here</a>
+    </p>
 </div>
 
 {% endblock %}

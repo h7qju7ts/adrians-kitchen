@@ -1,27 +1,49 @@
 {% extends "bookings/base.html" %}
+{% load i18n %}
 
 {% block title %}Login – Adrian's Kitchen{% endblock %}
 
 {% block content %}
 
-<div class="auth-card">
-    <h2 class="auth-title">Login to Your Account</h2>
+<div class="auth-card shadow-sm p-4 mx-auto mt-4">
+    <h2 class="text-center mb-4 fw-bold">Login</h2>
 
     <form method="POST" action="{% url 'account_login' %}">
         {% csrf_token %}
-        {{ form.as_p }}
 
-        <button type="submit" class="btn btn-primary">Login</button>
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        {% for field in form %}
+        <div class="mb-3">
+            <label class="form-label fw-semibold">{{ field.label }}</label>
+
+            {% if field.name == "password" %}
+                <div class="password-wrapper">
+                    {{ field }}
+                    <button type="button" class="toggle-password">👁</button>
+                </div>
+            {% else %}
+                {{ field }}
+            {% endif %}
+
+            {% for error in field.errors %}
+                <div class="form-error">{{ error }}</div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="btn auth-btn w-100">Log In</button>
     </form>
 
-    <p>
-        Don't have an account?
-        <a href="{% url 'account_signup' %}">Register here</a>
+    <p class="text-center mt-3">
+        <a href="{% url 'account_reset_password' %}">Forgot Password?</a>
     </p>
 
-    <p>
-        Forgot your password?
-        <a href="{% url 'account_reset_password' %}">Reset it</a>
+    <p class="text-center mt-3">
+        Don't have an account?
+        <a href="{% url 'account_signup' %}">Sign up here</a>
     </p>
 </div>
 
