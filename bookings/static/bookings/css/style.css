@@ -27,7 +27,7 @@ ul, li {
 /* =========================================================
    NAVBAR
 ========================================================= */
-.navbar {
+.ak-navbar {
     background: rgb(252, 141, 15);
     width: 100%;
     padding: 12px 0;
@@ -211,6 +211,19 @@ ul, li {
 .btn-outline:hover {
     background: rgb(252, 141, 15);
     color: white;
+}
+
+/* Style for pressed state btn */
+.btn:active,
+.btn:focus,
+.btn-primary:active,
+.btn-primary:focus,
+.btn-danger:active,
+.btn-danger:focus {
+    background: rgb(252, 141, 15) !important;
+    color: white !important;
+    box-shadow: none !important;
+    outline: none !important;
 }
 
 
