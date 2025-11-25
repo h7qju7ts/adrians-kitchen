@@ -373,6 +373,7 @@ form button:hover {
     padding-right: 40px;
 }
 
+/* Prevent toggle button from getting any background */
 .toggle-password {
     all: unset;
     position: absolute;
@@ -384,16 +385,27 @@ form button:hover {
     color: #555;
 }
 
-
-/* .toggle-password:hover {
+.toggle-password:hover {
+    background: none !important;
     color: rgb(252, 141, 15);
-} */
+}
 
 .password-rules p {
     font-size: 14px;
-    color: #b10000;
+    /* color: #b10000; */
     margin-top: 5px;
 }
+
+/* Remove bootstrap active/focus color */
+.toggle-password:focus,
+.toggle-password:active {
+    background: transparent !important;
+    color: inherit !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
 .form-error {
     color: #b10000;
     font-size: 14px;

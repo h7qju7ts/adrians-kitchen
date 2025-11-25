@@ -1,56 +1,51 @@
-"""
-Django settings for adrians_kitchen project.
-
-This file contains all configuration for your Django project:
-- Installed apps
-- Middleware
-- Templates
-- Authentication
-- Static files
-- Allauth settings
-- Database
-"""
-
 from pathlib import Path
 import os
+import dj_database_url
 
-# -------------------------------------------------------------------------
-# BASE DIRECTORY
-# -------------------------------------------------------------------------
-# BASE_DIR is used to build paths inside the project.
-# Example: BASE_DIR / 'templates' → "your_project/templates/"
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load env.py if exists
+if os.path.isfile(os.path.join(BASE_DIR, 'env.py')):
+    import env
 
 # -------------------------------------------------------------------------
-# SECURITY SETTINGS
+# SECURITY
 # -------------------------------------------------------------------------
+SECRET_KEY = os.environ.get("SECRET_KEY")
+DEBUG = os.environ.get("DEVELOPMENT") == "False"
 
-# Secret key used for hashing passwords, sessions, CSRF, etc.
-# ⚠️ IMPORTANT: Never commit this key publicly in real production.
-SECRET_KEY = 'django-insecure-(+(gb7nis48j@6(90*t_wwh7qv6$i(j5*v-f7w=6(jdi+r22y%'
-
-# Debug mode:
-# - True: for development (shows detailed errors)
-# - False: for production (hides errors from users)
-DEBUG = True
-
-# Your allowed domains:
-# Django will only respond to requests coming from these addresses.
 ALLOWED_HOSTS = [
-    'kitchen-adrian-84c5bb99022c.herokuapp.com',
     '127.0.0.1',
+    'kitchen-adrian-84c5bb99022c.herokuapp.com',
 ]
+
+# -------------------------------------------------------------------------
+# CLOUDINARY
+# -------------------------------------------------------------------------
+CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL")
+
+# -------------------------------------------------------------------------
+# STATIC & MEDIA
+# -------------------------------------------------------------------------
+
+# STATIC FILES
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'bookings' / 'static']
+
+# Cloudinary stores collected static files
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# MEDIA FILES (uploads)
+MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 # -------------------------------------------------------------------------
 # INSTALLED APPS
 # -------------------------------------------------------------------------
-# These are all the apps your Django project uses.
-# Django's default apps + Allauth + your "bookings" app.
-
 INSTALLED_APPS = [
-    # Django core apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -58,68 +53,40 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Required for Django Allauth
-    'django.contrib.sites',
+    # cloudinary
+    'cloudinary_storage',
+    'cloudinary',
 
-    # Allauth apps
+    # allauth
+    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
 
-    # Your custom booking app
     'bookings',
 ]
-
 
 # -------------------------------------------------------------------------
 # MIDDLEWARE
 # -------------------------------------------------------------------------
-# Middleware is like layers that process each request.
-# Example: security, sessions, authentication, CSRF protection, etc.
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-
-    # Whitenoise allows Django to serve static files on Heroku
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-
-    # Handles logged-in users
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    # Required for Django Allauth
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-
-# -------------------------------------------------------------------------
-# URL CONFIGURATION
-# -------------------------------------------------------------------------
 ROOT_URLCONF = 'adrians_kitchen.urls'
-
-
-# -------------------------------------------------------------------------
-# TEMPLATES
-# -------------------------------------------------------------------------
-# Django will look for templates in:
-# 1. BASE_DIR / "templates"
-# 2. templates/ folders inside apps (APP_DIRS=True)
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-
-        # The main place where global templates (like allauth) sit
         'DIRS': [BASE_DIR / "templates"],
-
         'APP_DIRS': True,
-
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
@@ -130,16 +97,11 @@ TEMPLATES = [
     },
 ]
 
-
 WSGI_APPLICATION = 'adrians_kitchen.wsgi.application'
-
 
 # -------------------------------------------------------------------------
 # DATABASE
 # -------------------------------------------------------------------------
-# SQLite is good for development.
-# On Heroku, the DATABASE_URL config will replace this automatically.
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -147,12 +109,9 @@ DATABASES = {
     }
 }
 
-
 # -------------------------------------------------------------------------
-# PASSWORD VALIDATION
+# PASSWORDS
 # -------------------------------------------------------------------------
-# Django’s recommended password strength checks.
-
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -160,77 +119,24 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-
 # -------------------------------------------------------------------------
-# INTERNATIONALIZATION
+# ALLAUTH CONFIG
 # -------------------------------------------------------------------------
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
-USE_I18N = True
-USE_TZ = True
+SITE_ID = 1
 
-
-# -------------------------------------------------------------------------
-# STATIC FILES
-# -------------------------------------------------------------------------
-# Static files = CSS, JS, images.
-
-STATIC_URL = '/static/'
-
-# Where your CSS lives inside the app:
-STATICFILES_DIRS = [
-    BASE_DIR / 'bookings' / 'static'
-]
-
-# Where Django collects all static files for production
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-# For Heroku (Whitenoise)
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-
-# -------------------------------------------------------------------------
-# DEFAULT PRIMARY KEY
-# -------------------------------------------------------------------------
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-# -------------------------------------------------------------------------
-# LOGIN / LOGOUT SETTINGS
-# -------------------------------------------------------------------------
-# Where users go after login/logout
 LOGIN_URL = 'account_login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
-
-# -------------------------------------------------------------------------
-# DJANGO ALLAUTH CONFIGURATION
-# -------------------------------------------------------------------------
-
-# Required for Allauth
-SITE_ID = 1
-
-# Authentication backends:
-# - Django's normal login
-# - Allauth login system
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
-
-# Allauth behavior settings
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'   # Login using username OR email
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'optional'            # Options: 'mandatory', 'optional', 'none'
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
 ACCOUNT_USERNAME_REQUIRED = True
 
-
-# Email backend 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-
-# Allauth custom forms
 ACCOUNT_FORMS = {
     'signup': 'bookings.forms.CustomSignupForm',
 }
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
