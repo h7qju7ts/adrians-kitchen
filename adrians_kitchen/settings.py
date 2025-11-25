@@ -2,141 +2,182 @@ from pathlib import Path
 import os
 import dj_database_url
 
+# ---------------------------------------------------------
+# BASE DIR
+# ---------------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Load env.py if exists
-if os.path.isfile(os.path.join(BASE_DIR, 'env.py')):
+# Load env.py if it exists
+if os.path.isfile(os.path.join(BASE_DIR, "env.py")):
     import env
 
-# -------------------------------------------------------------------------
+# ---------------------------------------------------------
 # SECURITY
-# -------------------------------------------------------------------------
+# ---------------------------------------------------------
 SECRET_KEY = os.environ.get("SECRET_KEY")
+
+# DEBUG:
+#   Locally → DEVELOPMENT=True → DEBUG=True
+#   Heroku  → DEVELOPMENT missing → DEBUG=False
 DEBUG = os.environ.get("DEVELOPMENT") == "False"
 
 ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'kitchen-adrian-84c5bb99022c.herokuapp.com',
+    "127.0.0.1",
+    "localhost",
+    "kitchen-adrian-84c5bb99022c.herokuapp.com",
 ]
 
-# -------------------------------------------------------------------------
-# CLOUDINARY
-# -------------------------------------------------------------------------
-CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL")
-
-# -------------------------------------------------------------------------
-# STATIC & MEDIA
-# -------------------------------------------------------------------------
-
-# STATIC FILES
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'bookings' / 'static']
-
-# Cloudinary stores collected static files
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-# MEDIA FILES (uploads)
-MEDIA_URL = '/media/'
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-
-# -------------------------------------------------------------------------
-# INSTALLED APPS
-# -------------------------------------------------------------------------
+# ---------------------------------------------------------
+# APPLICATION DEFINITION
+# ---------------------------------------------------------
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    # Django core
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
 
-    # cloudinary
-    'cloudinary_storage',
-    'cloudinary',
+    # Cloudinary
+    "cloudinary_storage",
+    "cloudinary",
 
-    # allauth
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
+    # Allauth
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
 
-    'bookings',
+    # Your app
+    "bookings",
 ]
 
-# -------------------------------------------------------------------------
-# MIDDLEWARE
-# -------------------------------------------------------------------------
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'allauth.account.middleware.AccountMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+
+    # Whitenoise for static on Heroku
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+
+    # Allauth
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
-ROOT_URLCONF = 'adrians_kitchen.urls'
+ROOT_URLCONF = "adrians_kitchen.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [BASE_DIR / "templates"],  # allauth + custom templates
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'adrians_kitchen.wsgi.application'
+WSGI_APPLICATION = "adrians_kitchen.wsgi.application"
 
-# -------------------------------------------------------------------------
-# DATABASE
-# -------------------------------------------------------------------------
+# ---------------------------------------------------------
+# DATABASES
+# ---------------------------------------------------------
+# Local = SQLite
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
-# -------------------------------------------------------------------------
-# PASSWORDS
-# -------------------------------------------------------------------------
+# Heroku = Uses DATABASE_URL
+if "DATABASE_URL" in os.environ:
+    DATABASES["default"] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+
+# ---------------------------------------------------------
+# PASSWORD VALIDATION
+# ---------------------------------------------------------
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-# -------------------------------------------------------------------------
-# ALLAUTH CONFIG
-# -------------------------------------------------------------------------
-SITE_ID = 1
+# ---------------------------------------------------------
+# INTERNATIONALIZATION
+# ---------------------------------------------------------
+LANGUAGE_CODE = "en-us"
+TIME_ZONE = "UTC"
+USE_I18N = True
+USE_TZ = True
 
-LOGIN_URL = 'account_login'
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+# ---------------------------------------------------------
+# STATIC FILES (CSS/JS)
+# ---------------------------------------------------------
+STATIC_URL = "/static/"
 
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+# Your app's CSS/JS/images folder
+# → bookings/static/bookings/*
+STATICFILES_DIRS = [
+    BASE_DIR / "bookings" / "static"
+]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# Whitenoise for Heroku static files
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# ---------------------------------------------------------
+# MEDIA (Images uploaded by the user)
+# ---------------------------------------------------------
+MEDIA_URL = "/media/"
+
+# Cloudinary for all media uploads
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+
+# ---------------------------------------------------------
+# CLOUDINARY
+# ---------------------------------------------------------
+CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL")
+
+# ---------------------------------------------------------
+# LOGIN SETTINGS
+# ---------------------------------------------------------
+LOGIN_URL = "account_login"
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "home"
+
+# ---------------------------------------------------------
+# ALLAUTH SETTINGS
+# ---------------------------------------------------------
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_USERNAME_REQUIRED = True
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 
 ACCOUNT_FORMS = {
-    'signup': 'bookings.forms.CustomSignupForm',
+    "signup": "bookings.forms.CustomSignupForm",
 }
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Email backend (console for dev)
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
