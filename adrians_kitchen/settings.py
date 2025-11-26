@@ -137,7 +137,7 @@ STATIC_URL = "/static/"
 # Your app's CSS/JS/images folder
 # → bookings/static/bookings/*
 STATICFILES_DIRS = [
-    BASE_DIR / "bookings" / "static" / "bookings"
+    BASE_DIR / "bookings" / "static"
 ]
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
