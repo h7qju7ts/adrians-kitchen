@@ -19,7 +19,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # DEBUG:
 #   Locally → DEVELOPMENT=True → DEBUG=True
 #   Heroku  → DEVELOPMENT missing → DEBUG=False
-DEBUG = os.environ.get("DEVELOPMENT") == "False"
+DEBUG = os.environ.get("DEVELOPMENT") == "True"
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
