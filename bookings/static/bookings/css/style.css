@@ -437,3 +437,25 @@ form button:hover {
         width: 90%;
     }
 }
+
+
+/* Very small screens: 360px and below */
+@media (max-width: 360px) {
+
+    .ak-navbar {
+        padding: 6px 0;
+    }
+
+    .nav-container {
+        padding: 0 10px;
+    }
+
+    .nav-logo {
+        font-size: 28px;    /* smaller logo */
+    }
+
+    .nav-toggle {
+        font-size: 28px;    /* smaller hamburger */
+        margin-left: 8px;   /* add breathing room */
+    }
+}
