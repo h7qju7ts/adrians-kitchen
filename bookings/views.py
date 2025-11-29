@@ -34,8 +34,14 @@ def add_booking(request):
 
 @login_required
 def view_bookings(request):
-    bookings = Booking.objects.filter(user=request.user).order_by("-date", "-time")
-    return render(request, "bookings/view_bookings.html", {"bookings": bookings})
+    # Clear previous login/logout messages
+    list(messages.get_messages(request))
+
+    user_bookings = Booking.objects.filter(user=request.user)
+
+    return render(request, "bookings/view_bookings.html", {
+        "bookings": user_bookings,
+    })
 
 
 @login_required
@@ -60,5 +66,3 @@ def delete_booking(request, booking_id):
         messages.success(request, "Your booking has been cancelled.")
         return redirect("view_bookings")
     return render(request, "bookings/delete_booking.html", {"booking": booking})
-
-

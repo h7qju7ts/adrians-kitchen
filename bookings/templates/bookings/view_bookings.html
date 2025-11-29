@@ -15,23 +15,31 @@
 {% endif %}
 
 {% if bookings %}
-    <ul class="booking-list">
-        {% for booking in bookings %}
-            <li class="booking-item shadow-sm">
+    <!-- Show the bookings table/cards/etc. -->
+    
 
-                <strong>{{ booking.name }}</strong><br>
-                {{ booking.date }} at {{ booking.time }}
+    {% for booking in bookings %}
+        <div class="booking-card">
+            <p><strong>Name:</strong> {{ booking.name }}</p>
+            <p><strong>Date:</strong> {{ booking.date }}</p>
+            <p><strong>Time:</strong> {{ booking.time }}</p>
+            <a href="{% url 'edit_booking' booking.id %}" class="btn btn-primary">Edit</a>
+        </div>
+    {% endfor %}
 
-                <div class="mt-2">
-                    <a href="{% url 'edit_booking' booking.id %}" class="btn btn-primary btn-sm">Edit</a>
-                    <a href="{% url 'delete_booking' booking.id %}" class="btn btn-danger btn-sm">Cancel</a>
-                </div>
-
-            </li>
-        {% endfor %}
-    </ul>
 {% else %}
-    <p class="text-center">You have no bookings yet.</p>
+    <div class="no-bookings-message">
+        <h2>No bookings found</h2>
+        <p>You haven't added any bookings yet.</p>
+
+        <a href="{% url 'home' %}" class="btn btn-secondary" style="margin-right:10px;">
+            Home
+        </a>
+
+        <a href="{% url 'add_booking' %}" class="btn btn-primary">
+            Add Booking
+        </a>
+    </div>
 {% endif %}
 
 {% endblock %}

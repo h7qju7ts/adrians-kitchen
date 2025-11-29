@@ -334,6 +334,26 @@ form button:hover {
 }
 
 
+.no-bookings-message {
+    margin-top: 40px;
+    padding: 30px;
+    background: #fffaf2;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+}
+
+.no-bookings-message h2 {
+    margin-bottom: 15px;
+    font-size: 26px;
+}
+
+.no-bookings-message p {
+    margin-bottom: 20px;
+    font-size: 17px;
+}
+
+
 /* =========================================================
    AUTH CARD (Login/Register/Reset)
 ========================================================= */
