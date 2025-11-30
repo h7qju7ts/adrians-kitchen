@@ -3,13 +3,14 @@ import os
 import dj_database_url
 
 # ---------------------------------------------------------
-# BASE DIR
+# BASE DIRECTORY
 # ---------------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Load env.py if it exists
-if os.path.isfile(os.path.join(BASE_DIR, "env.py")):
+# Load local env.py (only exists locally)
+if os.path.isfile(BASE_DIR / "env.py"):
     import env
+
 
 # ---------------------------------------------------------
 # SECURITY
@@ -17,8 +18,8 @@ if os.path.isfile(os.path.join(BASE_DIR, "env.py")):
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # DEBUG:
-#   Locally → DEVELOPMENT=True → DEBUG=True
-#   Heroku  → DEVELOPMENT missing → DEBUG=False
+# - Local machine → DEVELOPMENT=True → DEBUG=True
+# - Heroku         → DEVELOPMENT missing → DEBUG=False
 DEBUG = os.environ.get("DEVELOPMENT") == "True"
 
 ALLOWED_HOSTS = [
@@ -27,11 +28,12 @@ ALLOWED_HOSTS = [
     "kitchen-adrian-84c5bb99022c.herokuapp.com",
 ]
 
+
 # ---------------------------------------------------------
-# APPLICATION DEFINITION
+# APPLICATIONS
 # ---------------------------------------------------------
 INSTALLED_APPS = [
-    # Django core
+    # Django
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -60,10 +62,14 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
+
+# ---------------------------------------------------------
+# MIDDLEWARE
+# ---------------------------------------------------------
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
 
-    # Whitenoise for static on Heroku
+    # Required for Heroku static files
     "whitenoise.middleware.WhiteNoiseMiddleware",
 
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -77,12 +83,14 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
 ]
 
-ROOT_URLCONF = "adrians_kitchen.urls"
 
+# ---------------------------------------------------------
+# TEMPLATES
+# ---------------------------------------------------------
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],  # allauth + custom templates
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -94,12 +102,13 @@ TEMPLATES = [
     },
 ]
 
+ROOT_URLCONF = "adrians_kitchen.urls"
 WSGI_APPLICATION = "adrians_kitchen.wsgi.application"
+
 
 # ---------------------------------------------------------
 # DATABASES
 # ---------------------------------------------------------
-# Local = SQLite
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -107,9 +116,12 @@ DATABASES = {
     }
 }
 
-# Heroku = Uses DATABASE_URL
+# Heroku DATABASE_URL
 if "DATABASE_URL" in os.environ:
-    DATABASES["default"] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+    DATABASES["default"] = dj_database_url.config(
+        conn_max_age=600, ssl_require=True
+    )
+
 
 # ---------------------------------------------------------
 # PASSWORD VALIDATION
@@ -121,6 +133,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
+
 # ---------------------------------------------------------
 # INTERNATIONALIZATION
 # ---------------------------------------------------------
@@ -129,42 +142,30 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
+
 # ---------------------------------------------------------
-# STATIC FILES (CSS/JS)
+# STATIC FILES
 # ---------------------------------------------------------
 STATIC_URL = "/static/"
 
-# Your app's CSS/JS/images folder
-# → bookings/static/bookings/*
+# Your app static folder → bookings/static/bookings/*
 STATICFILES_DIRS = [
-    BASE_DIR / "bookings" / "static" 
+    BASE_DIR / "bookings" / "static",
 ]
-
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# Whitenoise for Heroku static files
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+
 # ---------------------------------------------------------
-# MEDIA (Images uploaded by the user)
+# MEDIA / CLOUDINARY
 # ---------------------------------------------------------
 MEDIA_URL = "/media/"
-
-# Cloudinary for all media uploads
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
-# ---------------------------------------------------------
-# CLOUDINARY
-# ---------------------------------------------------------
 CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL")
 
-# ---------------------------------------------------------
-# LOGIN SETTINGS
-# ---------------------------------------------------------
-LOGIN_URL = "account_login"
-LOGIN_REDIRECT_URL = "home"
-LOGOUT_REDIRECT_URL = "home"
 
 # ---------------------------------------------------------
 # ALLAUTH SETTINGS
@@ -174,11 +175,35 @@ ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 
+LOGIN_URL = "account_login"
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "home"
+
 ACCOUNT_FORMS = {
     "signup": "bookings.forms.CustomSignupForm",
 }
 
-# Email backend (console for dev)
+
+# ---------------------------------------------------------
+# EMAIL BACKEND
+# ---------------------------------------------------------
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+
+# ---------------------------------------------------------
+# MESSAGES (DISABLE LOGIN/LOGOUT NOTICES)
+# ---------------------------------------------------------
+MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
+
+# Disable ALL auto messages from Allauth
+ACCOUNT_LOGOUT_MESSAGE = False
+ACCOUNT_LOGIN_ON_PASSWORD_RESET = False
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = False
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "/"
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "/"
+
+
+# ---------------------------------------------------------
+# DEFAULT FIELD TYPE
+# ---------------------------------------------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

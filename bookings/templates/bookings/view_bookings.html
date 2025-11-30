@@ -23,7 +23,17 @@
             <p><strong>Name:</strong> {{ booking.name }}</p>
             <p><strong>Date:</strong> {{ booking.date }}</p>
             <p><strong>Time:</strong> {{ booking.time }}</p>
-            <a href="{% url 'edit_booking' booking.id %}" class="btn btn-primary">Edit</a>
+            <div class="booking-actions">
+              <!-- EDIT BUTTON -->
+             <a href="{% url 'edit_booking' booking.id %}" class="btn btn-danger btn-sm">
+                  Edit
+              </a>
+
+              <!-- CANCEL BUTTON -->
+              <a href="{% url 'delete_booking' booking.id %}" class="btn btn-danger btn-sm ms-2">
+                  Cancel
+              </a>
+          </div>
         </div>
     {% endfor %}
 

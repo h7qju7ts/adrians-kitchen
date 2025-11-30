@@ -324,6 +324,11 @@ form button:hover {
     font-weight: bolder;
 }
 
+#del-conf {
+    color: red!important;
+    font-weight: bolder;
+}
+
 
 /* Center “register here / reset it” text */
 .login p,
