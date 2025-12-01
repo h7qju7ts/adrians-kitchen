@@ -440,9 +440,87 @@ form button:hover {
 }
 
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+/* Media Queries */
+
+
+/* Media queri for displays of up to 360 px */
+@media (max-width: 360px) {
+
+    .ak-navbar {
+        padding: 6px 0;
+    }
+
+    .nav-container {
+        padding: 0 10px;
+    }
+
+    .nav-logo {
+        font-size: 28px;    /* smaller logo */
+    }
+
+    .nav-toggle {
+        font-size: 28px;    /* smaller hamburger */
+        margin-left: 8px;   /* add breathing room */
+    }
+}
+
+/* Media queri for displays of up to 376px */
+@media (max-width: 376px) {
+
+    .desktop-nav-links {
+        display: none;
+    }
+
+    .nav-toggle {
+        margin-left: auto;
+        margin-right: 10px;
+    }
+
+    .nav-logo {
+        font-size: 40px;
+    }
+
+    .page-container,
+    .container {
+        padding: 25px 20px;
+        width: 90%;
+        align-items: space-around;
+    }
+
+    .nav-container {
+        padding: 0 0 0 5px;
+    }
+
+    /* Side menue */
+    .side-menu {
+        position: fixed;
+        top: 0;
+       right: -220px;
+        width: 180px;
+        height: 100%;
+        background: rgb(252, 141, 15);
+        padding-top: 80px;
+        padding-left: 20px;
+        transition: 0.4s ease;
+        box-shadow: -3px 0 10px rgba(0,0,0,0.3);
+        z-index: 2000;
+    }
+
+
+
+}    
+
+/* Media queri for displays of up to 431px */
+@media (max-width: 431px) {
+
+    .nav-container {
+        padding: 0 5px 0 10px;
+    }
+}
+ 
+
+
+/* Media queri for displays of up to 900px */
 @media (max-width: 900px) {
 
     .desktop-nav-links {
@@ -465,23 +543,3 @@ form button:hover {
 }
 
 
-/* Very small screens: 360px and below */
-@media (max-width: 360px) {
-
-    .ak-navbar {
-        padding: 6px 0;
-    }
-
-    .nav-container {
-        padding: 0 10px;
-    }
-
-    .nav-logo {
-        font-size: 28px;    /* smaller logo */
-    }
-
-    .nav-toggle {
-        font-size: 28px;    /* smaller hamburger */
-        margin-left: 8px;   /* add breathing room */
-    }
-}
