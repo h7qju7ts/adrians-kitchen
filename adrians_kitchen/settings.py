@@ -27,7 +27,7 @@ ALLOWED_HOSTS = [
     "localhost",
     "kitchen-adrian-84c5bb99022c.herokuapp.com",
 ]
-
+ 
 
 # ---------------------------------------------------------
 # APPLICATIONS
