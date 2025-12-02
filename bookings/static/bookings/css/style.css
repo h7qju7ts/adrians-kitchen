@@ -236,8 +236,7 @@ ul, li {
 .container,
 .page-container {
     max-width: 950px;
-    margin: 40px auto;
-    padding: 35px 40px;
+    margin:  auto;
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 14px rgba(0,0,0,0.08);
@@ -442,25 +441,33 @@ form button:hover {
 
 /* Media Queries */
 
+/* Media queri for displays of up to 900px */
+@media (max-width: 900px) {
 
-/* Media queri for displays of up to 360 px */
-@media (max-width: 360px) {
-
-    .ak-navbar {
-        padding: 6px 0;
-    }
-
-    .nav-container {
-        padding: 0 10px;
-    }
-
-    .nav-logo {
-        font-size: 28px;    /* smaller logo */
+    .desktop-nav-links {
+        display: none;
     }
 
     .nav-toggle {
-        font-size: 28px;    /* smaller hamburger */
-        margin-left: 8px;   /* add breathing room */
+        display: block;
+    }
+
+    .nav-logo {
+        font-size: 40px;
+    }
+
+    .page-container,
+    .container {
+        padding: 25px 20px;
+        width: 90%;
+    }
+}  
+
+/* Media queri for displays of up to 431px */
+@media (max-width: 431px) {
+
+    .nav-container {
+        padding: 0 5px 0 10px;
     }
 }
 
@@ -477,7 +484,7 @@ form button:hover {
     }
 
     .nav-logo {
-        font-size: 40px;
+        font-size: 30px;
     }
 
     .page-container,
@@ -510,36 +517,34 @@ form button:hover {
 
 }    
 
-/* Media queri for displays of up to 431px */
-@media (max-width: 431px) {
+/* Media queri for displays of up to 360 px */
+@media (max-width: 360px) {
+
+    .ak-navbar {
+        padding: 6px 0;
+    }
 
     .nav-container {
-        padding: 0 5px 0 10px;
-    }
-}
- 
-
-
-/* Media queri for displays of up to 900px */
-@media (max-width: 900px) {
-
-    .desktop-nav-links {
-        display: none;
-    }
-
-    .nav-toggle {
-        display: block;
+        padding: 0 ;
     }
 
     .nav-logo {
-        font-size: 40px;
+        font-size: 35px;    /* smaller logo */
     }
 
-    .page-container,
-    .container {
-        padding: 25px 20px;
-        width: 90%;
+    .nav-toggle {
+        font-size: 28px;    /* smaller hamburger */
+        margin-left: 8px;   /* add breathing room */
+        padding-left: 15px;
     }
 }
+
+
+
+
+
+
+
+
 
 
